@@ -31,6 +31,18 @@ composer require ssnukala/sprinkle-crud6-vue
 
 ### Install Frontend Dependencies
 
+This sprinkle follows UserFrosting 6.0's hybrid distribution model:
+- **PHP components** (controllers, routes, services) are installed via Composer
+- **Vue components** are available via npm for direct import in your frontend
+
+To use the Vue components in your frontend application:
+
+```bash
+npm install @ssnukala/sprinkle-crud6-vue
+```
+
+Or if you're building the sprinkle assets locally:
+
 ```bash
 npm install
 npm run build
@@ -51,6 +63,27 @@ Add the sprinkle to your UserFrosting app's `sprinkles.json`:
     ]
 }
 ```
+
+### Using Vue Components
+
+You can import and use the CRUD6Vue components in your Vue application:
+
+```typescript
+// Import specific components
+import { CRUD6ListView, CRUD6CreateView } from '@ssnukala/sprinkle-crud6-vue/components';
+
+// Import views
+import { ProductList } from '@ssnukala/sprinkle-crud6-vue/views';
+
+// Import composables for advanced usage
+import { useCRUD6 } from '@ssnukala/sprinkle-crud6-vue/composables';
+```
+
+Or use the traditional sprinkle approach by accessing the built pages directly:
+- List view: `/crud6vue/your-model`
+- Create: `/crud6vue/your-model/create`
+- Detail: `/crud6vue/your-model/{id}`
+- Edit: `/crud6vue/your-model/{id}/edit`
 
 ## Usage
 

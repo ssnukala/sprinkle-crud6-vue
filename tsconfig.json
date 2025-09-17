@@ -17,13 +17,13 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["app/assets/*"]
     }
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.vue",
-    "src/vue-shims.d.ts"
+    "app/assets/**/*.ts",
+    "app/assets/**/*.vue",
+    "app/assets/vue-shims.d.ts"
   ],
   "exclude": [
     "node_modules",
