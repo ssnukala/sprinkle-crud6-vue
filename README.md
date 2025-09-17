@@ -233,7 +233,26 @@ npm run type-check
 See the `examples/` directory for complete configuration examples:
 
 - `examples/products.json` - Product catalog management
-- `examples/users.json` - User management interface
+- `examples/users.json` - User management interface  
+- `examples/groups.json` - User group management (compatible with theme-pink-cupcake)
+- `examples/articles.json` - Content/blog article management
+
+### Groups Management
+
+The groups example demonstrates compatibility with UserFrosting's theme-pink-cupcake Admin interface:
+
+```bash
+# Access the groups management interface
+/crud6vue/groups
+```
+
+Key features:
+- Sorting by name, description, user count, creation date
+- Search across group names, descriptions, and slugs
+- Permission-based create, view, edit, delete actions
+- User count badges
+- Soft delete support
+- Compatible with UserFrosting's existing groups structure
 
 ## Architecture
 

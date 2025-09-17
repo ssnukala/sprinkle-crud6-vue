@@ -138,5 +138,15 @@ This will automatically rebuild when you make changes to the source files.
 ## Next Steps
 
 - Check out the [examples/](examples/) directory for more configuration examples
+- Try the groups management interface: `/crud6vue/groups` (compatible with theme-pink-cupcake)
 - Read the [README.md](README.md) for detailed feature documentation
 - Customize the components for your specific needs
+
+### Example Usage
+
+Once installed, you can access the groups management interface at:
+```
+http://your-site.com/crud6vue/groups
+```
+
+This provides the same functionality as theme-pink-cupcake's Admin/PageGroups.vue but using the CRUD6Vue components and schema configuration.

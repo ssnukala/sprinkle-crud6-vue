@@ -1,7 +1,7 @@
 <template>
   <CRUD6DetailView 
-    :model="$route.params.model as string" 
     :id="$route.params.id as string" 
+    :model="$route.params.model as string" 
   />
 </template>
 
