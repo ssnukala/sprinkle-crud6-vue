@@ -1,7 +1,13 @@
 <template>
   <span v-if="field.type === 'boolean'">
-    <span v-if="value" class="uk-label uk-label-success">Yes</span>
-    <span v-else class="uk-label uk-label-danger">No</span>
+    <span
+      v-if="value"
+      class="uk-label uk-label-success"
+    >Yes</span>
+    <span
+      v-else
+      class="uk-label uk-label-danger"
+    >No</span>
   </span>
   
   <span v-else-if="field.type === 'date' || field.type === 'datetime'">
@@ -20,7 +26,10 @@
     >
       View JSON
     </button>
-    <span v-else class="uk-text-muted">—</span>
+    <span
+      v-else
+      class="uk-text-muted"
+    >—</span>
   </span>
   
   <span v-else-if="field.type === 'text'">
@@ -32,12 +41,23 @@
   </span>
 
   <!-- JSON Modal -->
-  <div :id="`json-modal-${fieldKey}`" uk-modal v-if="field.type === 'json'">
+  <div
+    v-if="field.type === 'json'"
+    :id="`json-modal-${fieldKey}`"
+    uk-modal
+  >
     <div class="uk-modal-dialog uk-modal-body">
-      <h2 class="uk-modal-title">{{ field.label }} Data</h2>
+      <h2 class="uk-modal-title">
+        {{ field.label }} Data
+      </h2>
       <pre class="uk-background-muted uk-padding-small">{{ JSON.stringify(value, null, 2) }}</pre>
       <p class="uk-text-right">
-        <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
+        <button
+          class="uk-button uk-button-default uk-modal-close"
+          type="button"
+        >
+          Close
+        </button>
       </p>
     </div>
   </div>

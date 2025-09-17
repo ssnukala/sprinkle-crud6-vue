@@ -5,36 +5,57 @@
       <h1 class="uk-heading-line">
         <span>{{ schema?.title || model }} Management</span>
       </h1>
-      <p v-if="schema?.description" class="uk-text-muted">{{ schema.description }}</p>
+      <p
+        v-if="schema?.description"
+        class="uk-text-muted"
+      >
+        {{ schema.description }}
+      </p>
     </div>
 
     <!-- Loading State -->
-    <div v-if="loading && !schema" class="uk-text-center uk-margin-large">
-      <div uk-spinner="ratio: 2"></div>
+    <div
+      v-if="loading && !schema"
+      class="uk-text-center uk-margin-large"
+    >
+      <div uk-spinner="ratio: 2" />
       <p>Loading schema...</p>
     </div>
 
     <!-- Error State -->
-    <div v-if="error" class="uk-alert-danger" uk-alert>
-      <a class="uk-alert-close" uk-close></a>
+    <div
+      v-if="error"
+      class="uk-alert-danger"
+      uk-alert
+    >
+      <a
+        class="uk-alert-close"
+        uk-close
+      />
       <p>{{ error }}</p>
     </div>
 
     <!-- Main Content -->
-    <div v-if="schema" class="uk-card uk-card-default uk-card-body">
+    <div
+      v-if="schema"
+      class="uk-card uk-card-default uk-card-body"
+    >
       <!-- Action Bar -->
       <div class="uk-margin-bottom uk-flex uk-flex-between uk-flex-wrap">
         <!-- Search -->
         <div class="uk-width-1-2@s uk-width-1-3@m">
           <div class="uk-inline uk-width-1-1">
-            <span class="uk-form-icon" uk-icon="icon: search"></span>
+            <span
+              class="uk-form-icon"
+              uk-icon="icon: search"
+            />
             <input 
               class="uk-input" 
               type="text" 
               placeholder="Search..."
               :value="listParams.search"
               @input="setSearch(($event.target as HTMLInputElement).value)"
-            />
+            >
           </div>
         </div>
 
@@ -44,7 +65,7 @@
             :to="{ name: 'crud6vue.create', params: { model } }"
             class="uk-button uk-button-primary"
           >
-            <span uk-icon="plus"></span>
+            <span uk-icon="plus" />
             Create {{ schema.title || model }}
           </router-link>
         </div>
@@ -62,15 +83,18 @@
                 @click="column.sortable && toggleSort(column.field)"
               >
                 {{ column.label }}
-                <span v-if="column.sortable && getSortDirection(column.field)" class="uk-margin-small-left">
+                <span
+                  v-if="column.sortable && getSortDirection(column.field)"
+                  class="uk-margin-small-left"
+                >
                   <span 
-                    uk-icon="triangle-up" 
-                    v-if="getSortDirection(column.field) === 'asc'"
-                  ></span>
+                    v-if="getSortDirection(column.field) === 'asc'" 
+                    uk-icon="triangle-up"
+                  />
                   <span 
-                    uk-icon="triangle-down" 
-                    v-if="getSortDirection(column.field) === 'desc'"
-                  ></span>
+                    v-if="getSortDirection(column.field) === 'desc'" 
+                    uk-icon="triangle-down"
+                  />
                 </span>
               </th>
               <th>Actions</th>
@@ -78,18 +102,31 @@
           </thead>
           <tbody>
             <tr v-if="loading">
-              <td :colspan="visibleColumns.length + 1" class="uk-text-center">
-                <div uk-spinner></div>
+              <td
+                :colspan="visibleColumns.length + 1"
+                class="uk-text-center"
+              >
+                <div uk-spinner />
                 Loading data...
               </td>
             </tr>
             <tr v-else-if="items.length === 0">
-              <td :colspan="visibleColumns.length + 1" class="uk-text-center uk-text-muted">
+              <td
+                :colspan="visibleColumns.length + 1"
+                class="uk-text-center uk-text-muted"
+              >
                 No items found.
               </td>
             </tr>
-            <tr v-else v-for="item in items" :key="item[schema.primary_key]">
-              <td v-for="column in visibleColumns" :key="column.field">
+            <tr
+              v-for="item in items"
+              v-else
+              :key="item[schema.primary_key]"
+            >
+              <td
+                v-for="column in visibleColumns"
+                :key="column.field"
+              >
                 <component 
                   :is="getFieldComponent(column)"
                   :value="item[column.field]"
@@ -104,7 +141,7 @@
                     class="uk-button uk-button-default"
                     title="View"
                   >
-                    <span uk-icon="eye"></span>
+                    <span uk-icon="eye" />
                   </router-link>
                   <router-link 
                     v-if="canUpdate"
@@ -112,15 +149,15 @@
                     class="uk-button uk-button-default"
                     title="Edit"
                   >
-                    <span uk-icon="pencil"></span>
+                    <span uk-icon="pencil" />
                   </router-link>
                   <button 
                     v-if="canDelete"
-                    @click="confirmDelete(item)"
                     class="uk-button uk-button-danger"
                     title="Delete"
+                    @click="confirmDelete(item)"
                   >
-                    <span uk-icon="trash"></span>
+                    <span uk-icon="trash" />
                   </button>
                 </div>
               </td>
@@ -130,19 +167,26 @@
       </div>
 
       <!-- Pagination -->
-      <div v-if="totalCount > listParams.size" class="uk-margin-top">
+      <div
+        v-if="totalCount > listParams.size"
+        class="uk-margin-top"
+      >
         <ul class="uk-pagination uk-flex-center">
           <li :class="{ 'uk-disabled': listParams.page <= 1 }">
             <a @click="setPage(listParams.page - 1)">
-              <span uk-pagination-previous></span>
+              <span uk-pagination-previous />
             </a>
           </li>
-          <li v-for="page in paginationPages" :key="page" :class="{ 'uk-active': page === listParams.page }">
+          <li
+            v-for="page in paginationPages"
+            :key="page"
+            :class="{ 'uk-active': page === listParams.page }"
+          >
             <a @click="setPage(page)">{{ page }}</a>
           </li>
           <li :class="{ 'uk-disabled': listParams.page >= totalPages }">
             <a @click="setPage(listParams.page + 1)">
-              <span uk-pagination-next></span>
+              <span uk-pagination-next />
             </a>
           </li>
         </ul>
@@ -158,13 +202,29 @@
     </div>
 
     <!-- Delete Confirmation Modal -->
-    <div id="delete-modal" uk-modal>
+    <div
+      id="delete-modal"
+      uk-modal
+    >
       <div class="uk-modal-dialog uk-modal-body">
-        <h2 class="uk-modal-title">Confirm Delete</h2>
+        <h2 class="uk-modal-title">
+          Confirm Delete
+        </h2>
         <p>Are you sure you want to delete this item? This action cannot be undone.</p>
         <p class="uk-text-right">
-          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-          <button @click="handleDelete" class="uk-button uk-button-danger" type="button">Delete</button>
+          <button
+            class="uk-button uk-button-default uk-modal-close"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="uk-button uk-button-danger"
+            type="button"
+            @click="handleDelete"
+          >
+            Delete
+          </button>
         </p>
       </div>
     </div>

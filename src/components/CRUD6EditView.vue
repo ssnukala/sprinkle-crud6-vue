@@ -9,35 +9,60 @@
         :to="{ name: 'crud6vue.detail', params: { model, id } }"
         class="uk-button uk-button-default uk-button-small"
       >
-        <span uk-icon="arrow-left"></span>
+        <span uk-icon="arrow-left" />
         Back to Details
       </router-link>
     </div>
 
     <!-- Loading State -->
-    <div v-if="loading && !currentItem" class="uk-text-center uk-margin-large">
-      <div uk-spinner="ratio: 2"></div>
+    <div
+      v-if="loading && !currentItem"
+      class="uk-text-center uk-margin-large"
+    >
+      <div uk-spinner="ratio: 2" />
       <p>Loading item...</p>
     </div>
 
     <!-- Error State -->
-    <div v-if="error" class="uk-alert-danger" uk-alert>
-      <a class="uk-alert-close" uk-close></a>
+    <div
+      v-if="error"
+      class="uk-alert-danger"
+      uk-alert
+    >
+      <a
+        class="uk-alert-close"
+        uk-close
+      />
       <p>{{ error }}</p>
     </div>
 
     <!-- Form -->
-    <div v-if="currentItem && schema" class="uk-card uk-card-default uk-card-body">
-      <form @submit.prevent="handleSubmit" class="uk-form-stacked">
-        <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m" uk-grid>
+    <div
+      v-if="currentItem && schema"
+      class="uk-card uk-card-default uk-card-body"
+    >
+      <form
+        class="uk-form-stacked"
+        @submit.prevent="handleSubmit"
+      >
+        <div
+          class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m"
+          uk-grid
+        >
           <div 
             v-for="field in editableFields" 
             :key="field.name"
             :class="{ 'uk-width-1-1': field.type === 'text' || field.type === 'json' }"
           >
-            <label class="uk-form-label" :for="field.name">
+            <label
+              class="uk-form-label"
+              :for="field.name"
+            >
               {{ field.label }}
-              <span v-if="field.required" class="uk-text-danger">*</span>
+              <span
+                v-if="field.required"
+                class="uk-text-danger"
+              >*</span>
             </label>
             
             <div class="uk-form-controls">
@@ -50,7 +75,7 @@
                 class="uk-input"
                 :required="field.required"
                 :placeholder="field.label"
-              />
+              >
               
               <!-- Number Input -->
               <input 
@@ -61,7 +86,7 @@
                 class="uk-input"
                 :required="field.required"
                 step="1"
-              />
+              >
               
               <!-- Decimal Input -->
               <input 
@@ -72,16 +97,19 @@
                 class="uk-input"
                 :required="field.required"
                 step="0.01"
-              />
+              >
               
               <!-- Boolean Checkbox -->
-              <label v-else-if="field.type === 'boolean'" class="uk-form-label">
+              <label
+                v-else-if="field.type === 'boolean'"
+                class="uk-form-label"
+              >
                 <input 
                   :id="field.name"
                   v-model="formData[field.name]"
                   type="checkbox"
                   class="uk-checkbox"
-                />
+                >
                 {{ field.label }}
               </label>
               
@@ -93,7 +121,7 @@
                 type="date"
                 class="uk-input"
                 :required="field.required"
-              />
+              >
               
               <!-- DateTime Input -->
               <input 
@@ -103,7 +131,7 @@
                 type="datetime-local"
                 class="uk-input"
                 :required="field.required"
-              />
+              >
               
               <!-- Textarea -->
               <textarea 
@@ -114,10 +142,13 @@
                 :required="field.required"
                 :placeholder="field.label"
                 rows="4"
-              ></textarea>
+              />
               
               <!-- JSON Editor -->
-              <div v-else-if="field.type === 'json'" class="uk-margin-small-top">
+              <div
+                v-else-if="field.type === 'json'"
+                class="uk-margin-small-top"
+              >
                 <textarea 
                   :id="field.name"
                   v-model="jsonText[field.name]"
@@ -125,8 +156,11 @@
                   placeholder="Enter valid JSON..."
                   rows="6"
                   @blur="validateJSON(field.name)"
-                ></textarea>
-                <div v-if="jsonErrors[field.name]" class="uk-text-danger uk-margin-small-top">
+                />
+                <div
+                  v-if="jsonErrors[field.name]"
+                  class="uk-text-danger uk-margin-small-top"
+                >
                   Invalid JSON: {{ jsonErrors[field.name] }}
                 </div>
               </div>
@@ -140,7 +174,7 @@
                 class="uk-input"
                 :required="field.required"
                 :placeholder="field.label"
-              />
+              >
             </div>
           </div>
         </div>
@@ -152,8 +186,14 @@
             class="uk-button uk-button-primary uk-width-1-1 uk-width-auto@s"
             :disabled="loading"
           >
-            <span v-if="loading" uk-spinner="ratio: 0.8"></span>
-            <span v-else uk-icon="check"></span>
+            <span
+              v-if="loading"
+              uk-spinner="ratio: 0.8"
+            />
+            <span
+              v-else
+              uk-icon="check"
+            />
             Update {{ schema.title || model }}
           </button>
           

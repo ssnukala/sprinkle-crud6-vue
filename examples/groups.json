@@ -1,0 +1,111 @@
+{
+  "model": "groups",
+  "title": "Group Management",
+  "description": "Manage user groups and their permissions",
+  "table": "groups",
+  "primary_key": "id",
+  "timestamps": true,
+  "soft_delete": true,
+  "permissions": {
+    "read": "view_groups",
+    "create": "create_group",
+    "update": "update_group_field",
+    "delete": "delete_group"
+  },
+  "default_sort": {
+    "name": "asc"
+  },
+  "row_template": "default",
+  "fields": {
+    "id": {
+      "type": "integer",
+      "label": "Group ID",
+      "auto_increment": true,
+      "readonly": true,
+      "sortable": true,
+      "filterable": false,
+      "searchable": false
+    },
+    "name": {
+      "type": "string",
+      "label": "Group Name",
+      "required": true,
+      "sortable": true,
+      "filterable": true,
+      "searchable": true,
+      "validation": {
+        "required": true,
+        "unique": true,
+        "length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "slug": {
+      "type": "string",
+      "label": "Slug",
+      "required": true,
+      "sortable": true,
+      "filterable": true,
+      "searchable": true,
+      "validation": {
+        "required": true,
+        "unique": true,
+        "regex": "^[a-z0-9-]+$"
+      }
+    },
+    "description": {
+      "type": "text",
+      "label": "Description",
+      "required": false,
+      "sortable": true,
+      "filterable": true,
+      "searchable": true
+    },
+    "icon": {
+      "type": "string",
+      "label": "Icon",
+      "required": false,
+      "sortable": false,
+      "filterable": false,
+      "searchable": false
+    },
+    "users_count": {
+      "type": "integer",
+      "label": "Users",
+      "readonly": true,
+      "default": 0,
+      "sortable": true,
+      "filterable": false,
+      "searchable": false
+    },
+    "created_at": {
+      "type": "datetime",
+      "label": "Created At",
+      "readonly": true,
+      "sortable": true,
+      "filterable": false,
+      "searchable": false,
+      "date_format": "Y-m-d H:i:s"
+    },
+    "updated_at": {
+      "type": "datetime",
+      "label": "Updated At",
+      "readonly": true,
+      "sortable": true,
+      "filterable": false,
+      "searchable": false,
+      "date_format": "Y-m-d H:i:s"
+    },
+    "deleted_at": {
+      "type": "datetime",
+      "label": "Deleted At",
+      "readonly": true,
+      "sortable": true,
+      "filterable": false,
+      "searchable": false,
+      "date_format": "Y-m-d H:i:s"
+    }
+  }
+}

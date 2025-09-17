@@ -10,7 +10,7 @@
           :to="{ name: 'crud6vue.list', params: { model } }"
           class="uk-button uk-button-default uk-button-small"
         >
-          <span uk-icon="arrow-left"></span>
+          <span uk-icon="arrow-left" />
           Back to List
         </router-link>
         
@@ -19,38 +19,57 @@
           :to="{ name: 'crud6vue.edit', params: { model, id } }"
           class="uk-button uk-button-primary uk-button-small uk-margin-small-left"
         >
-          <span uk-icon="pencil"></span>
+          <span uk-icon="pencil" />
           Edit
         </router-link>
         
         <button 
           v-if="canDelete && currentItem"
-          @click="confirmDelete"
           class="uk-button uk-button-danger uk-button-small uk-margin-small-left"
+          @click="confirmDelete"
         >
-          <span uk-icon="trash"></span>
+          <span uk-icon="trash" />
           Delete
         </button>
       </div>
     </div>
 
     <!-- Loading State -->
-    <div v-if="loading && !currentItem" class="uk-text-center uk-margin-large">
-      <div uk-spinner="ratio: 2"></div>
+    <div
+      v-if="loading && !currentItem"
+      class="uk-text-center uk-margin-large"
+    >
+      <div uk-spinner="ratio: 2" />
       <p>Loading item...</p>
     </div>
 
     <!-- Error State -->
-    <div v-if="error" class="uk-alert-danger" uk-alert>
-      <a class="uk-alert-close" uk-close></a>
+    <div
+      v-if="error"
+      class="uk-alert-danger"
+      uk-alert
+    >
+      <a
+        class="uk-alert-close"
+        uk-close
+      />
       <p>{{ error }}</p>
     </div>
 
     <!-- Item Details -->
-    <div v-if="currentItem && schema" class="uk-card uk-card-default uk-card-body">
+    <div
+      v-if="currentItem && schema"
+      class="uk-card uk-card-default uk-card-body"
+    >
       <dl class="uk-description-list uk-description-list-divider">
-        <div v-for="field in displayFields" :key="field.name" class="uk-margin-small">
-          <dt class="uk-text-bold">{{ field.label }}</dt>
+        <div
+          v-for="field in displayFields"
+          :key="field.name"
+          class="uk-margin-small"
+        >
+          <dt class="uk-text-bold">
+            {{ field.label }}
+          </dt>
           <dd>
             <CRUD6FieldDisplay 
               :value="currentItem[field.name]"
@@ -70,13 +89,29 @@
     </div>
 
     <!-- Delete Confirmation Modal -->
-    <div id="delete-modal" uk-modal>
+    <div
+      id="delete-modal"
+      uk-modal
+    >
       <div class="uk-modal-dialog uk-modal-body">
-        <h2 class="uk-modal-title">Confirm Delete</h2>
+        <h2 class="uk-modal-title">
+          Confirm Delete
+        </h2>
         <p>Are you sure you want to delete this item? This action cannot be undone.</p>
         <p class="uk-text-right">
-          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-          <button @click="handleDelete" class="uk-button uk-button-danger" type="button">Delete</button>
+          <button
+            class="uk-button uk-button-default uk-modal-close"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="uk-button uk-button-danger"
+            type="button"
+            @click="handleDelete"
+          >
+            Delete
+          </button>
         </p>
       </div>
     </div>
