@@ -220,8 +220,8 @@ const paginationPages = computed(() => {
   const total = totalPages.value;
   
   // Simple pagination logic - show up to 5 pages
-  let start = Math.max(1, current - 2);
-  let end = Math.min(total, current + 2);
+  const start = Math.max(1, current - 2);
+  const end = Math.min(total, current + 2);
   
   for (let i = start; i <= end; i++) {
     pages.push(i);
@@ -253,7 +253,7 @@ function getFieldComponent(column: FieldColumnConfig) {
 
 function confirmDelete(item: CRUD6ListItem): void {
   itemToDelete.value = item;
-  // @ts-ignore - UIkit modal API
+  // @ts-expect-error - UIkit modal API
   UIkit.modal('#delete-modal').show();
 }
 
@@ -261,7 +261,7 @@ async function handleDelete(): Promise<void> {
   if (itemToDelete.value && schema.value) {
     const success = await deleteItem(itemToDelete.value[schema.value.primary_key]);
     if (success) {
-      // @ts-ignore - UIkit modal API
+      // @ts-expect-error - UIkit modal API
       UIkit.modal('#delete-modal').hide();
       itemToDelete.value = null;
     }

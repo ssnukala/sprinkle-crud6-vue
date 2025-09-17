@@ -174,8 +174,13 @@ export function useCRUD6(model: string) {
 
     function setFilter(field: string, value: any): void {
         if (value === null || value === undefined || value === '') {
-            delete listParams.filters[field];
+            if (listParams.filters) {
+                delete listParams.filters[field];
+            }
         } else {
+            if (!listParams.filters) {
+                listParams.filters = {};
+            }
             listParams.filters[field] = value;
         }
         listParams.page = 1; // Reset to first page when filtering

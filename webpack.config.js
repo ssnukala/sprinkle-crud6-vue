@@ -1,13 +1,20 @@
-const path = require('path');
-const { VueLoaderPlugin } = require('vue-loader');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { VueLoaderPlugin } from 'vue-loader';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
+    mode: 'development',
     entry: './src/index.ts',
     output: {
         path: path.resolve(__dirname, 'app/assets/dist'),
         filename: 'crud6-vue.bundle.js',
-        library: 'CRUD6Vue',
-        libraryTarget: 'umd',
+        library: {
+            name: 'CRUD6Vue',
+            type: 'umd'
+        },
         clean: true
     },
     module: {
@@ -19,8 +26,13 @@ module.exports = {
             {
                 test: /\.ts$/,
                 loader: 'ts-loader',
+                exclude: /node_modules/,
                 options: {
-                    appendTsSuffixTo: [/\.vue$/]
+                    appendTsSuffixTo: [/\.vue$/],
+                    transpileOnly: true,
+                    compilerOptions: {
+                        noEmit: false
+                    }
                 }
             },
             {
