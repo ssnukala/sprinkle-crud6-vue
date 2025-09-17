@@ -1,0 +1,14 @@
+{% extends "@admin/layouts/page.html.twig" %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block body_matter %}
+<div id="crud6vue-detail-app">
+    <crud6-vue-detail-view :model="'{{ model }}'" :id="'{{ id }}'"></crud6-vue-detail-view>
+</div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ assets.compiled('crud6-vue') }}"></script>
+{% endblock %}

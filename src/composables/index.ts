@@ -1,0 +1,1 @@
+export { useCRUD6 } from './useCRUD6';

@@ -1,0 +1,163 @@
+{
+  "model": "articles",
+  "title": "Article Management",
+  "description": "Manage blog articles and content",
+  "table": "articles",
+  "primary_key": "id",
+  "timestamps": true,
+  "soft_delete": true,
+  "permissions": {
+    "read": "view_articles",
+    "create": "create_article",
+    "update": "edit_article",
+    "delete": "delete_article"
+  },
+  "default_sort": {
+    "published_at": "desc"
+  },
+  "row_template": "article_row",
+  "fields": {
+    "id": {
+      "type": "integer",
+      "label": "Article ID",
+      "auto_increment": true,
+      "readonly": true,
+      "sortable": true,
+      "filterable": false,
+      "searchable": false
+    },
+    "title": {
+      "type": "string",
+      "label": "Title",
+      "required": true,
+      "sortable": true,
+      "filterable": true,
+      "searchable": true,
+      "validation": {
+        "required": true,
+        "length": {
+          "min": 5,
+          "max": 200
+        }
+      }
+    },
+    "slug": {
+      "type": "string",
+      "label": "URL Slug",
+      "required": true,
+      "sortable": true,
+      "filterable": true,
+      "searchable": true,
+      "validation": {
+        "required": true,
+        "unique": true,
+        "regex": "^[a-z0-9-]+$"
+      }
+    },
+    "excerpt": {
+      "type": "text",
+      "label": "Excerpt",
+      "required": false,
+      "sortable": false,
+      "filterable": false,
+      "searchable": true
+    },
+    "content": {
+      "type": "text",
+      "label": "Content",
+      "required": true,
+      "sortable": false,
+      "filterable": false,
+      "searchable": true
+    },
+    "author_id": {
+      "type": "integer",
+      "label": "Author",
+      "required": true,
+      "sortable": true,
+      "filterable": true,
+      "searchable": false,
+      "filter_type": "equals"
+    },
+    "category_id": {
+      "type": "integer",
+      "label": "Category",
+      "required": false,
+      "sortable": true,
+      "filterable": true,
+      "searchable": false,
+      "filter_type": "equals"
+    },
+    "status": {
+      "type": "string",
+      "label": "Status",
+      "required": true,
+      "default": "draft",
+      "sortable": true,
+      "filterable": true,
+      "searchable": false,
+      "filter_type": "equals"
+    },
+    "featured": {
+      "type": "boolean",
+      "label": "Featured Article",
+      "default": false,
+      "sortable": true,
+      "filterable": true,
+      "searchable": false
+    },
+    "published_at": {
+      "type": "datetime",
+      "label": "Published At",
+      "required": false,
+      "sortable": true,
+      "filterable": true,
+      "searchable": false,
+      "filter_type": "greater_than",
+      "date_format": "Y-m-d H:i:s"
+    },
+    "tags": {
+      "type": "json",
+      "label": "Tags",
+      "required": false,
+      "sortable": false,
+      "filterable": false,
+      "searchable": false
+    },
+    "meta_data": {
+      "type": "json",
+      "label": "Meta Data",
+      "required": false,
+      "sortable": false,
+      "filterable": false,
+      "searchable": false
+    },
+    "view_count": {
+      "type": "integer",
+      "label": "View Count",
+      "default": 0,
+      "readonly": true,
+      "sortable": true,
+      "filterable": false,
+      "searchable": false
+    },
+    "created_at": {
+      "type": "datetime",
+      "label": "Created At",
+      "readonly": true,
+      "sortable": true,
+      "filterable": false,
+      "searchable": false,
+      "date_format": "Y-m-d H:i:s"
+    },
+    "updated_at": {
+      "type": "datetime",
+      "label": "Updated At",
+      "readonly": true,
+      "sortable": true,
+      "filterable": false,
+      "searchable": false,
+      "date_format": "Y-m-d H:i:s"
+    }
+  }
+}
