@@ -35,26 +35,35 @@ Add the sprinkle to your `app/sprinkles.json` file:
 
 ## Step 3: Install Frontend Dependencies
 
-Navigate to the sprinkle directory and install dependencies:
+This sprinkle supports two approaches for frontend development:
+
+### Option A: Use Pre-built Sprinkle Pages (Traditional)
+
+Navigate to the sprinkle directory and build the assets:
 
 ```bash
 cd vendor/ssnukala/sprinkle-crud6-vue
 npm install
-```
-
-## Step 4: Build Assets
-
-Build the Vue components:
-
-```bash
-# For development
-npm run build:dev
-
-# For production
 npm run build
 ```
 
-## Step 5: Configure Your Model
+This approach uses the traditional UserFrosting sprinkle pages at routes like `/crud6vue/your-model`.
+
+### Option B: Import Vue Components Directly (Modern)
+
+Install the npm package in your frontend application:
+
+```bash
+npm install @ssnukala/sprinkle-crud6-vue
+```
+
+Then import components as needed:
+
+```typescript
+import { CRUD6ListView } from '@ssnukala/sprinkle-crud6-vue/components';
+```
+
+## Step 4: Configure Your Model
 
 Create a JSON schema file for your model in `app/schema/crud6vue/your-model.json`:
 
@@ -101,11 +110,25 @@ Ensure the appropriate permissions are defined in your UserFrosting permission s
 
 ## Step 7: Access the Interface
 
+### Using Traditional Sprinkle Pages
 Navigate to:
 - List view: `/crud6vue/your-model`
 - Create: `/crud6vue/your-model/create`
 - Detail: `/crud6vue/your-model/{id}`
 - Edit: `/crud6vue/your-model/{id}/edit`
+
+### Using Vue Components in Your App
+Import and use components directly in your Vue application:
+
+```vue
+<template>
+  <CRUD6ListView model="products" />
+</template>
+
+<script setup>
+import { CRUD6ListView } from '@ssnukala/sprinkle-crud6-vue/components';
+</script>
+```
 
 ## Troubleshooting
 

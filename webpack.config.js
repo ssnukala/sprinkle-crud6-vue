@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 export default {
     mode: 'development',
-    entry: './src/index.ts',
+    entry: './app/assets/index.ts',
     output: {
         path: path.resolve(__dirname, 'app/assets/dist'),
         filename: 'crud6-vue.bundle.js',
@@ -50,7 +50,7 @@ export default {
     resolve: {
         extensions: ['.ts', '.js', '.vue'],
         alias: {
-            '@': path.resolve(__dirname, 'src')
+            '@': path.resolve(__dirname, 'app/assets')
         }
     },
     externals: {
